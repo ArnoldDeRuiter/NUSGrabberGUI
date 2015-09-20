@@ -8,7 +8,7 @@ His NUSGrabber console application can be found [here](http://crediar.no-ip.com/
 Info:
 
 What it does is just parsing the table from WiiUBrew's Wiki with the relevant data.
-Data as the TitleID is retrieved and the "00050000-" of the ID gets replaced with "0005000E".
+Data such as the TitleID is retrieved and the "00050000-" of the ID gets replaced with "0005000E".
 
 I fill the data in the Comboboxes (aka Dropdownmenu's) and the user can click on the [Download] button.
 After which this application launches the NUSGrabber console with the parameters, based on the user's selection in the Comboboxes.
