@@ -1,0 +1,8 @@
+D:\Users\Arnold\Documents\Visual Studio 2015\Projects\NUS grabber GUI\NUS grabber GUI\bin\Release\NUS grabber GUI.exe.config
+D:\Users\Arnold\Documents\Visual Studio 2015\Projects\NUS grabber GUI\NUS grabber GUI\bin\Release\NUS grabber GUI.exe
+D:\Users\Arnold\Documents\Visual Studio 2015\Projects\NUS grabber GUI\NUS grabber GUI\bin\Release\NUS grabber GUI.pdb
+D:\Users\Arnold\Documents\Visual Studio 2015\Projects\NUS grabber GUI\NUS grabber GUI\obj\Release\NUS_grabber_GUI.Form1.resources
+D:\Users\Arnold\Documents\Visual Studio 2015\Projects\NUS grabber GUI\NUS grabber GUI\obj\Release\NUS_grabber_GUI.Properties.Resources.resources
+D:\Users\Arnold\Documents\Visual Studio 2015\Projects\NUS grabber GUI\NUS grabber GUI\obj\Release\NUS grabber GUI.csproj.GenerateResource.Cache
+D:\Users\Arnold\Documents\Visual Studio 2015\Projects\NUS grabber GUI\NUS grabber GUI\obj\Release\NUS grabber GUI.exe
+D:\Users\Arnold\Documents\Visual Studio 2015\Projects\NUS grabber GUI\NUS grabber GUI\obj\Release\NUS grabber GUI.pdb
