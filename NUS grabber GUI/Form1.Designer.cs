@@ -115,9 +115,9 @@
             this.lblTitleForm.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitleForm.Location = new System.Drawing.Point(12, 4);
             this.lblTitleForm.Name = "lblTitleForm";
-            this.lblTitleForm.Size = new System.Drawing.Size(152, 21);
+            this.lblTitleForm.Size = new System.Drawing.Size(150, 21);
             this.lblTitleForm.TabIndex = 11;
-            this.lblTitleForm.Text = "NUS grabber GUI vX";
+            this.lblTitleForm.Text = "NUSGrabber GUI vX";
             this.lblTitleForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbl_MouseDown);
             this.lblTitleForm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lbl_MouseMove);
             this.lblTitleForm.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbl_MouseUp);
@@ -127,9 +127,9 @@
             this.lblAuthor.AutoSize = true;
             this.lblAuthor.Location = new System.Drawing.Point(201, 262);
             this.lblAuthor.Name = "lblAuthor";
-            this.lblAuthor.Size = new System.Drawing.Size(118, 13);
+            this.lblAuthor.Size = new System.Drawing.Size(117, 13);
             this.lblAuthor.TabIndex = 12;
-            this.lblAuthor.Text = "NUS grabber by crediar";
+            this.lblAuthor.Text = "NUSGrabber by crediar";
             // 
             // label1
             // 
@@ -205,7 +205,7 @@
             this.Controls.Add(this.lblTitleForm);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
-            this.Text = "NUS grabber GUI v1.2";
+            this.Text = "NUSGrabber GUI v1.3";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form_MouseDown);

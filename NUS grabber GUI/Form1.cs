@@ -38,7 +38,6 @@ namespace NUS_grabber_GUI
         {
             int progress = 0;
             List<ComboboxItem> temp = new List<ComboboxItem>();
-            List<string> allColomns = new List<string>();
             //When page loaded
             bool skipFirst = false, skipSecond = false;
             foreach (HtmlElement table in ((WebBrowser)sender).Document.GetElementsByTagName("table"))
@@ -47,7 +46,7 @@ namespace NUS_grabber_GUI
                 progress = (progress == 100) ? 0 : progress;
                 prBar.Value = progress;
                 if (skipFirst && skipSecond) { 
-                    if (table.GetAttribute("className").Equals("wikitable sortable jquery-tablesorter"))
+                    if (table.GetAttribute("className").Equals("wikitable sortable jquery-tablesorter") || table.GetAttribute("className").Equals("wikitable sortable")) //Removing jquery-tablesorter for some... thanks voddy!
                     {
                         foreach (HtmlElement tr in table.GetElementsByTagName("tr"))
                         {
@@ -55,7 +54,6 @@ namespace NUS_grabber_GUI
                             progress = (progress == 100) ? 0 : progress;
                             prBar.Value = progress;
                             int columncount = 1;
-                            //string all = "";
                             ComboboxItem cbi = new ComboboxItem();
                             foreach (HtmlElement td in tr.GetElementsByTagName("td"))
                             {   

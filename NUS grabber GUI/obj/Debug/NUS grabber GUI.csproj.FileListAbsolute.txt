@@ -8,3 +8,11 @@ d:\users\arnold\documents\visual studio 2015\Projects\NUS grabber GUI\NUS grabbe
 d:\users\arnold\documents\visual studio 2015\Projects\NUS grabber GUI\NUS grabber GUI\obj\Debug\NUS grabber GUI.pdb
 D:\Users\Arnold\Documents\Visual Studio 2015\Projects\NUS grabber GUI\NUS grabber GUI\bin\Debug\NUS grabber GUI.exe.CodeAnalysisLog.xml
 D:\Users\Arnold\Documents\Visual Studio 2015\Projects\NUS grabber GUI\NUS grabber GUI\bin\Debug\NUS grabber GUI.exe.lastcodeanalysissucceeded
+D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\bin\Debug\NUS grabber GUI.exe.config
+D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\obj\Debug\NUS grabber GUI.exe
+D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\obj\Debug\NUS grabber GUI.pdb
+D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\bin\Debug\NUS grabber GUI.exe
+D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\bin\Debug\NUS grabber GUI.pdb
+D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\obj\Debug\NUS_grabber_GUI.Form1.resources
+D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\obj\Debug\NUS_grabber_GUI.Properties.Resources.resources
+D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\obj\Debug\NUS grabber GUI.csproj.GenerateResource.Cache
