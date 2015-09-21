@@ -32,6 +32,7 @@ namespace NUS_grabber_GUI
         
         private void Form1_Load(object sender, EventArgs e)
         {
+            cgbSystemTitles.Visible = false;
             lblTitleForm.Text = this.Text;
             // Create a WebBrowser instance. 
             WebBrowser webBrowserForPrinting = new WebBrowser();
@@ -46,10 +47,12 @@ namespace NUS_grabber_GUI
             webBrowserForPrinting.Url = new Uri(@"http://wiiubrew.org/wiki/Title_database");
         }
 
-        List<ComboboxItem> finalTitels;
+        List<ComboboxItem> finalGameUpdates;
+        List<ComboboxSysItem> finalSystemTitles;
         private void PrintDocument(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            finalTitels = new List<ComboboxItem>();
+            finalGameUpdates = new List<ComboboxItem>();
+            finalSystemTitles = new List<ComboboxSysItem>();
             int progress = 0;
             //When page loaded
             bool skipFirst = false, skipSecond = false;
@@ -58,7 +61,8 @@ namespace NUS_grabber_GUI
                 progress++;
                 progress = (progress == 100) ? 0 : progress;
                 prBar.Value = progress;
-                if (skipFirst && skipSecond) { 
+                if (skipFirst && skipSecond)
+                {
                     if (table.GetAttribute("className").Equals("wikitable sortable jquery-tablesorter") || table.GetAttribute("className").Equals("wikitable sortable")) //Removing jquery-tablesorter for some... thanks voddy!
                     {
                         foreach (HtmlElement tr in table.GetElementsByTagName("tr"))
@@ -69,59 +73,119 @@ namespace NUS_grabber_GUI
                             int columncount = 1;
                             ComboboxItem cbi = new ComboboxItem();
                             foreach (HtmlElement td in tr.GetElementsByTagName("td"))
-                            {   
+                            {
                                 //TITLE
                                 if (columncount == 1)
                                 {
-                                    cbi.Title_ID = "null";
-                                    string abc = (td.InnerText != null || td.InnerText.Trim() != "") ? td.InnerText.Trim() : "null";
+                                    string abc = null;
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; continue; }
                                     cbi.Title_ID = abc;
                                 }
                                 //DESC
-                                if (columncount ==2)
+                                if (columncount == 2)
                                 {
-                                    cbi.Desc = "null";
-                                    string abc = (td.InnerText != null || td.InnerText.Trim() != "") ? td.InnerText.Trim() : "null";
+                                    string abc = null;
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; continue; }
                                     cbi.Desc = abc;
                                 }
                                 //VER
                                 if (columncount == 4)
                                 {
-                                    cbi.Versions = "null";
-                                    string abc = (td.InnerText != null || td.InnerText.Trim() != "") ? td.InnerText.Trim() : "null";
+                                    string abc = null;
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; continue; }
                                     cbi.Versions = abc;
                                 }
                                 //REG
                                 if (columncount == 5)
                                 {
-                                    string abc = (td.InnerText != null || td.InnerText.Trim() != "") ? td.InnerText.Trim() : "null";
-                                    cbi.Desc = abc + " - " + cbi.Desc;                                    
+                                    string abc = null;
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; continue; }
+                                    cbi.Desc = abc + " - " + cbi.Desc;
                                 }
                                 columncount++;
                             }
-                            finalTitels.Add(cbi);
+                            finalGameUpdates.Add(cbi);
                         }
-                        break; //We got the table we wanted, now stop.
+                        break; //We got the table(s) we wanted, now stop.
                     }
-                } else if (skipFirst)
+                }
+                else if (skipFirst)
                 {
-                    skipSecond = true;
-                } else
+                    progress++;
+                    progress = (progress == 100) ? 0 : progress;
+                    prBar.Value = progress;
+                    if (table.GetAttribute("className").Equals("wikitable sortable jquery-tablesorter") || table.GetAttribute("className").Equals("wikitable sortable")) //Removing jquery-tablesorter for some... thanks voddy!
+                    {
+                        foreach (HtmlElement tr in table.GetElementsByTagName("tr"))
+                        {
+                            progress++;
+                            progress = (progress == 100) ? 0 : progress;
+                            prBar.Value = progress;
+                            int columncount = 1;
+                            ComboboxSysItem cbisys = new ComboboxSysItem();
+                            foreach (HtmlElement td in tr.GetElementsByTagName("td"))
+                            {
+                                //TITLE
+                                if (columncount == 1)
+                                {
+                                    string abc = null;
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; continue; }                                    
+                                    cbisys.Title_ID = abc;
+                                }
+                                //DESC
+                                if (columncount == 2)
+                                {
+                                    string abc = null;
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; continue; }
+                                    cbisys.Desc = abc;
+                                }
+                                //VER
+                                if (columncount == 4)
+                                {
+                                    string abc = null;
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; continue; }
+                                    cbisys.Versions = abc;
+                                }
+                                //REG
+                                if (columncount == 5)
+                                {
+                                    string abc = null;
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; continue; }   
+                                    cbisys.Desc = abc + " - " + cbisys.Desc;
+                                }
+                                columncount++;
+                            }
+                            finalSystemTitles.Add(cbisys);
+                        }
+
+                        skipSecond = true;
+                    }   
+                }
+                else
                 {
                     skipFirst = true;
                 }
             }
-
-
-
-            foreach (var t in finalTitels)
+            
+            //Add to Game Updates combobox.
+            foreach (var t in finalGameUpdates)
             {
                 if (t.Desc != null)
                 {
                     cmbTitles.Items.Add(t);
                     cmbTitles.SelectedIndex = 0;
                 }
-            }            
+            }
+
+            //Add to System Titles combobox.
+            foreach (var s in finalSystemTitles)
+            {
+                if (s.Desc != null)
+                {
+                    cmbSysTitles.Items.Add(s);
+                    cmbSysTitles.SelectedIndex = 0;
+                }
+            }
 
             lblLoad.Text = "";//Done!
             prBar.Visible = false;
@@ -130,6 +194,8 @@ namespace NUS_grabber_GUI
             cmbTitles.Enabled = true;
             cmbVersions.Enabled = true;
             btnDownload.Enabled = true;
+            btnDownUp.Enabled = true;//UPdate Games
+            btnDownSys.Enabled = true;//SYStem Titles
 
             // Dispose the WebBrowser now that the task is complete. 
             ((WebBrowser)sender).Dispose();
@@ -235,59 +301,121 @@ namespace NUS_grabber_GUI
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
-            bool empty = false;
-            try
+            //If on Game Updates
+            if (cgbGameUpdates.Visible)
             {
-                (cmbTitles.SelectedItem as ComboboxItem).Title_ID.ToString();
-            }
-            catch (Exception)
-            {
-                lblAlert.Visible = true;
-                //throw;
-                empty = true;
-            }
-            if (!empty) { 
+                bool empty = false;
                 try
                 {
-                    string Title_ID = (cmbTitles.SelectedItem as ComboboxItem).Title_ID.ToString();
-                    string output = Title_ID.Replace("00050000-", "0005000E");
+                    (cmbTitles.SelectedItem as ComboboxItem).Title_ID.ToString();
+                }
+                catch (Exception)
+                {
+                    lblAlert.Visible = true;
+                    //throw;
+                    empty = true;
+                }
+                if (!empty)
+                {
+                    try
+                    {
+                        string Title_ID = (cmbTitles.SelectedItem as ComboboxItem).Title_ID.ToString();
+                        string output = Title_ID.Replace("00050000-", "0005000E");
 
-                    if (cmbVersions.SelectedText == "Latest")
-                    {
-                        //... Nothing
-                    }
-                    else
-                    {
-                        string versionnr = cmbVersions.SelectedText;
-                        if (versionnr.Length < 1)
+                        if (cmbSysVersions.SelectedText == "Latest")
                         {
-                            versionnr = "";
+                            //... Nothing
                         }
                         else
                         {
-                            versionnr.Substring(1, versionnr.Length - 1);
+                            string versionnr = cmbVersions.SelectedText;
+                            if (versionnr.Length < 1)
+                            {
+                                versionnr = "";
+                            }
+                            else
+                            {
+                                versionnr.Substring(1, versionnr.Length - 1);
+                            }
+                            output += " " + versionnr;
                         }
-                        output += " " + versionnr;
-                    }
 
-                    Process.Start(@"crediar\NUSgrabber.exe", output.Trim());
-                }
-                catch (Exception exep)
-                {
-                    MessageBox.Show("Could'not open NUSgrabber.exe\n\nDetailed error:\n\n" + exep.ToString());
+                        Process.Start(@"crediar\NUSgrabber.exe", output.Trim());
+                    }
+                    catch (Exception exep)
+                    {
+                        MessageBox.Show("Could'not open NUSgrabber.exe\n\nDetailed error:\n\n" + exep.ToString());
+                    }
                 }
             }
+            //If on System Titles
+            else if (cgbSystemTitles.Visible)
+            {
+                bool empty = false;
+                try
+                {
+                    (cmbSysTitles.SelectedItem as ComboboxSysItem).Title_ID.ToString();
+                }
+                catch (Exception)
+                {
+                    lblAlert.Visible = true;
+                    //throw;
+                    empty = true;
+                }
+                if (!empty)
+                {
+                    try
+                    {
+                        string Title_ID = (cmbSysTitles.SelectedItem as ComboboxSysItem).Title_ID.ToString();
+                        string output = Title_ID.Replace("-", "");
+
+                        if (cmbVersions.SelectedText == "Latest")
+                        {
+                            //... Nothing
+                        }
+                        else
+                        {
+                            string versionnr = cmbSysVersions.SelectedText;
+                            if (versionnr.Length < 1)
+                            {
+                                versionnr = "";
+                            }
+                            else
+                            {
+                                versionnr.Substring(1, versionnr.Length - 1);
+                            }
+                            output += " " + versionnr;
+                        }
+
+                        Process.Start(@"crediar\NUSgrabber.exe", output.Trim());
+                    }
+                    catch (Exception exep)
+                    {
+                        MessageBox.Show("Could'not open NUSgrabber.exe\n\nDetailed error:\n\n" + exep.ToString());
+                    }
+                }
+            }
+
         }
         
-
         private void btnDownUp_Click(object sender, EventArgs e)
         {
-            //Nothing yet.
+            //Open Game Updates cgp
+            if (!cgbGameUpdates.Visible)
+            {
+                Sliderx.Animate(cgbSystemTitles as Control, Sliderx.Effect.Slide, 500, 360);
+                Slider.Animate(cgbGameUpdates as Control, Slider.Effect.Slide, 500, 360);
+            }
         }
 
         private void btnDownOther_Click(object sender, EventArgs e)
         {
-            //Nothing yet.
+            //Open System Titles cgp
+            if (!cgbSystemTitles.Visible)
+            {
+                Slider.Animate(cgbGameUpdates as Control, Slider.Effect.Slide, 500, 360);
+                Sliderx.Animate(cgbSystemTitles as Control, Sliderx.Effect.Slide, 500, 360);
+            }
         }
 
         private void Form_Paint(object sender, PaintEventArgs e)
@@ -305,7 +433,6 @@ namespace NUS_grabber_GUI
             if (cmbTitles.SelectedText != null || cmbTitles.SelectedText != "")
             {
                 lblAlert.Visible = false;
-                cmbTitles.BackColor = default(Color);
 
                 cmbVersions.Items.Clear();
                 string vers = (cmbTitles.SelectedItem as ComboboxItem).Versions.ToString();
@@ -329,7 +456,7 @@ namespace NUS_grabber_GUI
             cmbTitles.Items.Clear();
              if (txtSearchBox.Text != "")
              {
-                 foreach (var t in finalTitels)
+                 foreach (var t in finalGameUpdates)
                  {
                     string desc = t.Desc;
                     if (desc != null) { 
@@ -345,7 +472,7 @@ namespace NUS_grabber_GUI
              }
              else
              {
-                foreach (var t in finalTitels)
+                foreach (var t in finalGameUpdates)
                  {
                      if (t.Desc != null)
                      {
@@ -354,6 +481,63 @@ namespace NUS_grabber_GUI
                      }
                  }
              }
+        }
+
+        private void cmbSysTitles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbSysTitles.SelectedText != null || cmbSysTitles.SelectedText != "")
+            {
+                lblAlert.Visible = false;
+
+                cmbSysVersions.Items.Clear();
+                string vers = (cmbSysTitles.SelectedItem as ComboboxSysItem).Versions.ToString();
+                string[] versSysAr = vers.Split(',');
+
+                cmbSysVersions.Items.Add("Latest");
+                foreach (var vrS in versSysAr)
+                {
+                    if (vrS != null)
+                    {
+                        cmbSysVersions.Items.Add(vrS.Trim());
+                        cmbSysVersions.SelectedIndex = 0;
+                    }
+                }
+            }
+        }
+
+        private void txtSysSearchBox_TextChanged(object sender, EventArgs e)
+        {
+            cmbSysTitles.Items.Clear();
+            if (txtSysSearchBox.Text != "")
+            {
+                foreach (var s in finalSystemTitles)
+                {
+                    string desc = s.Desc;
+                    if (desc != null)
+                    {
+                        if (desc.IndexOf(txtSysSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) //Case insensitive.
+                        {
+                            cmbSysTitles.Items.Add(s);
+                            cmbSysTitles.SelectedIndex = 0;
+                        }
+                    }
+                    else
+                    {
+                        lblAlert.Visible = true;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var s in finalSystemTitles)
+                {
+                    if (s.Desc != null)
+                    {
+                        cmbSysTitles.Items.Add(s);
+                        cmbSysTitles.SelectedIndex = 0;
+                    }
+                }
+            }
         }
     }
 }

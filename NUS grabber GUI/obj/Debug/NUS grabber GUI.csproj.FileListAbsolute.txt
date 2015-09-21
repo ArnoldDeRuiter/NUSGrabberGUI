@@ -16,3 +16,4 @@ D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\bin\Debug\NUS gra
 D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\obj\Debug\NUS_grabber_GUI.Form1.resources
 D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\obj\Debug\NUS_grabber_GUI.Properties.Resources.resources
 D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\obj\Debug\NUS grabber GUI.csproj.GenerateResource.Cache
+D:\Users\Arnold\Documents\GitHub\NUSGrabberGUI\NUS grabber GUI\obj\Debug\NUS grabber GUI.csprojResolveAssemblyReference.cache

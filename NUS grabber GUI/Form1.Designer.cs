@@ -33,12 +33,20 @@
             this.pbClose = new System.Windows.Forms.PictureBox();
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnDownUp = new System.Windows.Forms.Button();
-            this.btnDownOther = new System.Windows.Forms.Button();
+            this.btnDownSys = new System.Windows.Forms.Button();
             this.lblTitleForm = new System.Windows.Forms.Label();
             this.lblAuthor = new System.Windows.Forms.Label();
             this.lblOtherAuthor = new System.Windows.Forms.Label();
             this.lblAlert = new System.Windows.Forms.Label();
-            this.myGroupBox1 = new MayaMaya.myGroupBox();
+            this.cgbSystemTitles = new MayaMaya.myGroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtSysSearchBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbSysVersions = new System.Windows.Forms.ComboBox();
+            this.cmbSysTitles = new System.Windows.Forms.ComboBox();
+            this.cgbGameUpdates = new MayaMaya.myGroupBox();
             this.lblFilter = new System.Windows.Forms.Label();
             this.txtSearchBox = new System.Windows.Forms.TextBox();
             this.lblVersions = new System.Windows.Forms.Label();
@@ -50,7 +58,8 @@
             this.cmbTitles = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimalize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbClose)).BeginInit();
-            this.myGroupBox1.SuspendLayout();
+            this.cgbSystemTitles.SuspendLayout();
+            this.cgbGameUpdates.SuspendLayout();
             this.SuspendLayout();
             // 
             // pbMinimalize
@@ -104,16 +113,16 @@
             this.btnDownUp.UseVisualStyleBackColor = true;
             this.btnDownUp.Click += new System.EventHandler(this.btnDownUp_Click);
             // 
-            // btnDownOther
+            // btnDownSys
             // 
-            this.btnDownOther.Enabled = false;
-            this.btnDownOther.Location = new System.Drawing.Point(205, 109);
-            this.btnDownOther.Name = "btnDownOther";
-            this.btnDownOther.Size = new System.Drawing.Size(106, 23);
-            this.btnDownOther.TabIndex = 9;
-            this.btnDownOther.Text = "Other stuff";
-            this.btnDownOther.UseVisualStyleBackColor = true;
-            this.btnDownOther.Click += new System.EventHandler(this.btnDownOther_Click);
+            this.btnDownSys.Enabled = false;
+            this.btnDownSys.Location = new System.Drawing.Point(205, 109);
+            this.btnDownSys.Name = "btnDownSys";
+            this.btnDownSys.Size = new System.Drawing.Size(106, 23);
+            this.btnDownSys.TabIndex = 9;
+            this.btnDownSys.Text = "System Titles";
+            this.btnDownSys.UseVisualStyleBackColor = true;
+            this.btnDownSys.Click += new System.EventHandler(this.btnDownOther_Click);
             // 
             // lblTitleForm
             // 
@@ -160,30 +169,114 @@
             this.lblAlert.Text = "Alert message";
             this.lblAlert.Visible = false;
             // 
-            // myGroupBox1
+            // cgbSystemTitles
             // 
-            this.myGroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.myGroupBox1.BorderColor = System.Drawing.Color.Transparent;
-            this.myGroupBox1.Controls.Add(this.lblFilter);
-            this.myGroupBox1.Controls.Add(this.txtSearchBox);
-            this.myGroupBox1.Controls.Add(this.lblVersions);
-            this.myGroupBox1.Controls.Add(this.lblGameTitles);
-            this.myGroupBox1.Controls.Add(this.lnlGbTitle);
-            this.myGroupBox1.Controls.Add(this.prBar);
-            this.myGroupBox1.Controls.Add(this.cmbVersions);
-            this.myGroupBox1.Controls.Add(this.lblLoad);
-            this.myGroupBox1.Controls.Add(this.cmbTitles);
-            this.myGroupBox1.Location = new System.Drawing.Point(1, 32);
-            this.myGroupBox1.Name = "myGroupBox1";
-            this.myGroupBox1.Size = new System.Drawing.Size(200, 278);
-            this.myGroupBox1.TabIndex = 10;
-            this.myGroupBox1.TabStop = false;
+            this.cgbSystemTitles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.cgbSystemTitles.BorderColor = System.Drawing.Color.Transparent;
+            this.cgbSystemTitles.Controls.Add(this.label1);
+            this.cgbSystemTitles.Controls.Add(this.txtSysSearchBox);
+            this.cgbSystemTitles.Controls.Add(this.label2);
+            this.cgbSystemTitles.Controls.Add(this.label3);
+            this.cgbSystemTitles.Controls.Add(this.label4);
+            this.cgbSystemTitles.Controls.Add(this.cmbSysVersions);
+            this.cgbSystemTitles.Controls.Add(this.cmbSysTitles);
+            this.cgbSystemTitles.Location = new System.Drawing.Point(1, 32);
+            this.cgbSystemTitles.Name = "cgbSystemTitles";
+            this.cgbSystemTitles.Size = new System.Drawing.Size(200, 278);
+            this.cgbSystemTitles.TabIndex = 11;
+            this.cgbSystemTitles.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(5, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(39, 17);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Filter:";
+            // 
+            // txtSysSearchBox
+            // 
+            this.txtSysSearchBox.Location = new System.Drawing.Point(50, 21);
+            this.txtSysSearchBox.Name = "txtSysSearchBox";
+            this.txtSysSearchBox.Size = new System.Drawing.Size(145, 20);
+            this.txtSysSearchBox.TabIndex = 8;
+            this.txtSysSearchBox.TextChanged += new System.EventHandler(this.txtSysSearchBox_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(5, 95);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 17);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Version:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(5, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 17);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Title:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(2, 2);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(71, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "System Titles";
+            // 
+            // cmbSysVersions
+            // 
+            this.cmbSysVersions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSysVersions.FormattingEnabled = true;
+            this.cmbSysVersions.Location = new System.Drawing.Point(8, 115);
+            this.cmbSysVersions.Name = "cmbSysVersions";
+            this.cmbSysVersions.Size = new System.Drawing.Size(121, 21);
+            this.cmbSysVersions.TabIndex = 2;
+            // 
+            // cmbSysTitles
+            // 
+            this.cmbSysTitles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSysTitles.FormattingEnabled = true;
+            this.cmbSysTitles.Location = new System.Drawing.Point(8, 71);
+            this.cmbSysTitles.Name = "cmbSysTitles";
+            this.cmbSysTitles.Size = new System.Drawing.Size(187, 21);
+            this.cmbSysTitles.TabIndex = 0;
+            this.cmbSysTitles.SelectedIndexChanged += new System.EventHandler(this.cmbSysTitles_SelectedIndexChanged);
+            // 
+            // cgbGameUpdates
+            // 
+            this.cgbGameUpdates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.cgbGameUpdates.BorderColor = System.Drawing.Color.Transparent;
+            this.cgbGameUpdates.Controls.Add(this.lblFilter);
+            this.cgbGameUpdates.Controls.Add(this.txtSearchBox);
+            this.cgbGameUpdates.Controls.Add(this.lblVersions);
+            this.cgbGameUpdates.Controls.Add(this.lblGameTitles);
+            this.cgbGameUpdates.Controls.Add(this.lnlGbTitle);
+            this.cgbGameUpdates.Controls.Add(this.prBar);
+            this.cgbGameUpdates.Controls.Add(this.cmbVersions);
+            this.cgbGameUpdates.Controls.Add(this.lblLoad);
+            this.cgbGameUpdates.Controls.Add(this.cmbTitles);
+            this.cgbGameUpdates.Location = new System.Drawing.Point(1, 32);
+            this.cgbGameUpdates.Name = "cgbGameUpdates";
+            this.cgbGameUpdates.Size = new System.Drawing.Size(200, 278);
+            this.cgbGameUpdates.TabIndex = 10;
+            this.cgbGameUpdates.TabStop = false;
             // 
             // lblFilter
             // 
             this.lblFilter.AutoSize = true;
             this.lblFilter.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFilter.Location = new System.Drawing.Point(7, 21);
+            this.lblFilter.Location = new System.Drawing.Point(5, 21);
             this.lblFilter.Name = "lblFilter";
             this.lblFilter.Size = new System.Drawing.Size(39, 17);
             this.lblFilter.TabIndex = 9;
@@ -191,7 +284,7 @@
             // 
             // txtSearchBox
             // 
-            this.txtSearchBox.Location = new System.Drawing.Point(52, 21);
+            this.txtSearchBox.Location = new System.Drawing.Point(50, 21);
             this.txtSearchBox.Name = "txtSearchBox";
             this.txtSearchBox.Size = new System.Drawing.Size(145, 20);
             this.txtSearchBox.TabIndex = 8;
@@ -201,7 +294,7 @@
             // 
             this.lblVersions.AutoSize = true;
             this.lblVersions.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersions.Location = new System.Drawing.Point(7, 95);
+            this.lblVersions.Location = new System.Drawing.Point(5, 95);
             this.lblVersions.Name = "lblVersions";
             this.lblVersions.Size = new System.Drawing.Size(54, 17);
             this.lblVersions.TabIndex = 7;
@@ -211,7 +304,7 @@
             // 
             this.lblGameTitles.AutoSize = true;
             this.lblGameTitles.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGameTitles.Location = new System.Drawing.Point(7, 48);
+            this.lblGameTitles.Location = new System.Drawing.Point(5, 48);
             this.lblGameTitles.Name = "lblGameTitles";
             this.lblGameTitles.Size = new System.Drawing.Size(35, 17);
             this.lblGameTitles.TabIndex = 6;
@@ -238,7 +331,7 @@
             // 
             this.cmbVersions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbVersions.FormattingEnabled = true;
-            this.cmbVersions.Location = new System.Drawing.Point(10, 115);
+            this.cmbVersions.Location = new System.Drawing.Point(8, 115);
             this.cmbVersions.Name = "cmbVersions";
             this.cmbVersions.Size = new System.Drawing.Size(121, 21);
             this.cmbVersions.TabIndex = 2;
@@ -257,7 +350,7 @@
             // 
             this.cmbTitles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTitles.FormattingEnabled = true;
-            this.cmbTitles.Location = new System.Drawing.Point(10, 71);
+            this.cmbTitles.Location = new System.Drawing.Point(8, 71);
             this.cmbTitles.Name = "cmbTitles";
             this.cmbTitles.Size = new System.Drawing.Size(187, 21);
             this.cmbTitles.TabIndex = 0;
@@ -268,10 +361,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(314, 311);
+            this.Controls.Add(this.cgbSystemTitles);
             this.Controls.Add(this.lblAlert);
             this.Controls.Add(this.lblOtherAuthor);
-            this.Controls.Add(this.myGroupBox1);
-            this.Controls.Add(this.btnDownOther);
+            this.Controls.Add(this.cgbGameUpdates);
+            this.Controls.Add(this.btnDownSys);
             this.Controls.Add(this.lblAuthor);
             this.Controls.Add(this.btnDownUp);
             this.Controls.Add(this.btnDownload);
@@ -280,7 +374,7 @@
             this.Controls.Add(this.lblTitleForm);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
-            this.Text = "NUSGrabber GUI v1.4";
+            this.Text = "NUSGrabber GUI v1.5";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form_MouseDown);
@@ -288,8 +382,10 @@
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimalize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbClose)).EndInit();
-            this.myGroupBox1.ResumeLayout(false);
-            this.myGroupBox1.PerformLayout();
+            this.cgbSystemTitles.ResumeLayout(false);
+            this.cgbSystemTitles.PerformLayout();
+            this.cgbGameUpdates.ResumeLayout(false);
+            this.cgbGameUpdates.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,8 +397,8 @@
         private System.Windows.Forms.PictureBox pbClose;
         private System.Windows.Forms.Button btnDownload;
         private System.Windows.Forms.Button btnDownUp;
-        private System.Windows.Forms.Button btnDownOther;
-        private MayaMaya.myGroupBox myGroupBox1;
+        private System.Windows.Forms.Button btnDownSys;
+        private MayaMaya.myGroupBox cgbGameUpdates;
         private System.Windows.Forms.Label lblLoad;
         private System.Windows.Forms.ComboBox cmbTitles;
         private System.Windows.Forms.Label lblTitleForm;
@@ -316,6 +412,14 @@
         private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.TextBox txtSearchBox;
         private System.Windows.Forms.Label lblAlert;
+        private MayaMaya.myGroupBox cgbSystemTitles;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtSysSearchBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbSysVersions;
+        private System.Windows.Forms.ComboBox cmbSysTitles;
     }
 }
 
