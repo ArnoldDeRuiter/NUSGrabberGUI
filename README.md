@@ -15,6 +15,8 @@ After which this application launches the NUSGrabber console with the parameters
 
 Screenshots:
 
-![alt tag](http://i.imgur.com/jVO7IfS.png)
+![Loading screen](http://i.imgur.com/SuSfhuQ.png)
 
-![alt tag](http://i.imgur.com/chaxRSp.png)
+![Main screen](http://i.imgur.com/BUcLyFW.png)
+
+![Second screen](http://i.imgur.com/CtXDqWE.png)
