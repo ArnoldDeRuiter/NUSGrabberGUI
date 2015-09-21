@@ -15,6 +15,6 @@ After which this application launches the NUSGrabber console with the parameters
 
 Screenshots:
 
-![alt tag](http://i.imgur.com/N4Kt8en.png)
+![alt tag](http://i.imgur.com/jVO7IfS.png)
 
-![alt tag](http://i.imgur.com/Kfmnyws.png)
+![alt tag](http://i.imgur.com/chaxRSp.png)
