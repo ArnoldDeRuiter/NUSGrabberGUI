@@ -33,6 +33,7 @@ namespace NUS_grabber_GUI
         private void Form1_Load(object sender, EventArgs e)
         {
             cgbSystemTitles.Visible = false;
+            cgbFullTitles.Visible = false;
             lblTitleForm.Text = this.Text;
             // Create a WebBrowser instance. 
             WebBrowser webBrowserForPrinting = new WebBrowser();
@@ -78,33 +79,35 @@ namespace NUS_grabber_GUI
                                 if (columncount == 1)
                                 {
                                     string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; continue; }
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; }
                                     cbi.Title_ID = abc;
                                 }
                                 //DESC
                                 if (columncount == 2)
                                 {
                                     string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; continue; }
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; }
                                     cbi.Desc = abc;
                                 }
                                 //VER
                                 if (columncount == 4)
                                 {
                                     string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; continue; }
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; }
                                     cbi.Versions = abc;
                                 }
                                 //REG
                                 if (columncount == 5)
                                 {
                                     string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; continue; }
-                                    cbi.Desc = abc + " - " + cbi.Desc;
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; }
+                                    if (cbi.Desc != null)
+                                        cbi.Desc = abc + " - " + cbi.Desc;
                                 }
                                 columncount++;
                             }
-                            finalGameUpdates.Add(cbi);
+                            if (cbi.Desc != null)
+                                finalGameUpdates.Add(cbi);
                         }
                         break; //We got the table(s) we wanted, now stop.
                     }
@@ -129,33 +132,35 @@ namespace NUS_grabber_GUI
                                 if (columncount == 1)
                                 {
                                     string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; continue; }                                    
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; }                                    
                                     cbisys.Title_ID = abc;
                                 }
                                 //DESC
                                 if (columncount == 2)
                                 {
                                     string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; continue; }
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; }
                                     cbisys.Desc = abc;
                                 }
                                 //VER
                                 if (columncount == 4)
                                 {
                                     string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; continue; }
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; }
                                     cbisys.Versions = abc;
                                 }
                                 //REG
                                 if (columncount == 5)
                                 {
                                     string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; continue; }   
-                                    cbisys.Desc = abc + " - " + cbisys.Desc;
+                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; }
+                                    if (cbisys.Desc != null)
+                                        cbisys.Desc = abc + " - " + cbisys.Desc;
                                 }
                                 columncount++;
                             }
-                            finalSystemTitles.Add(cbisys);
+                            if (cbisys.Desc != null)
+                                finalSystemTitles.Add(cbisys);
                         }
 
                         skipSecond = true;
@@ -166,7 +171,9 @@ namespace NUS_grabber_GUI
                     skipFirst = true;
                 }
             }
-            
+
+            //Sorting...
+            finalGameUpdates.Sort(delegate (ComboboxItem c1, ComboboxItem c2) { return c1.Desc.CompareTo(c2.Desc); });
             //Add to Game Updates combobox.
             foreach (var t in finalGameUpdates)
             {
@@ -174,9 +181,15 @@ namespace NUS_grabber_GUI
                 {
                     cmbTitles.Items.Add(t);
                     cmbTitles.SelectedIndex = 0;
+
+                    //full titles also:
+                    cmbFuTitles.Items.Add(t);
+                    cmbFuTitles.SelectedIndex = 0;
                 }
             }
 
+            //Sorting...
+            finalSystemTitles.Sort(delegate (ComboboxSysItem cs1, ComboboxSysItem cs2) { return cs1.Desc.CompareTo(cs2.Desc); });
             //Add to System Titles combobox.
             foreach (var s in finalSystemTitles)
             {
@@ -196,6 +209,7 @@ namespace NUS_grabber_GUI
             btnDownload.Enabled = true;
             btnDownUp.Enabled = true;//UPdate Games
             btnDownSys.Enabled = true;//SYStem Titles
+            btnDownFu.Enabled = true;//FUll Titles
 
             // Dispose the WebBrowser now that the task is complete. 
             ((WebBrowser)sender).Dispose();
@@ -302,7 +316,7 @@ namespace NUS_grabber_GUI
         private void btnDownload_Click(object sender, EventArgs e)
         {
             //If on Game Updates
-            if (cgbGameUpdates.Visible)
+            if (!cgbSystemTitles.Visible)
             {
                 bool empty = false;
                 try
@@ -320,7 +334,15 @@ namespace NUS_grabber_GUI
                     try
                     {
                         string Title_ID = (cmbTitles.SelectedItem as ComboboxItem).Title_ID.ToString();
-                        string output = Title_ID.Replace("00050000-", "0005000E");
+                        string output = "";
+                        if (cgbFullTitles.Visible)
+                        {
+                            output = Title_ID.Replace("-", "");
+                        } else
+                        {
+                            output = Title_ID.Replace("00050000-", "0005000E");
+                        }
+                         
 
                         if (cmbSysVersions.SelectedText == "Latest")
                         {
@@ -349,7 +371,7 @@ namespace NUS_grabber_GUI
                 }
             }
             //If on System Titles
-            else if (cgbSystemTitles.Visible)
+            else
             {
                 bool empty = false;
                 try
@@ -401,8 +423,11 @@ namespace NUS_grabber_GUI
         private void btnDownUp_Click(object sender, EventArgs e)
         {
             //Open Game Updates cgp
-            if (!cgbGameUpdates.Visible)
+            if (!cgbGameUpdates.Visible && cgbFullTitles.Visible)
             {
+                Slidery.Animate(cgbFullTitles as Control, Slidery.Effect.Slide, 500, 360);
+                Slider.Animate(cgbGameUpdates as Control, Slider.Effect.Slide, 500, 360);
+            } else if (!cgbGameUpdates.Visible && cgbSystemTitles.Visible) {
                 Sliderx.Animate(cgbSystemTitles as Control, Sliderx.Effect.Slide, 500, 360);
                 Slider.Animate(cgbGameUpdates as Control, Slider.Effect.Slide, 500, 360);
             }
@@ -411,10 +436,27 @@ namespace NUS_grabber_GUI
         private void btnDownOther_Click(object sender, EventArgs e)
         {
             //Open System Titles cgp
-            if (!cgbSystemTitles.Visible)
+            if (!cgbSystemTitles.Visible && cgbGameUpdates.Visible)
             {
                 Slider.Animate(cgbGameUpdates as Control, Slider.Effect.Slide, 500, 360);
                 Sliderx.Animate(cgbSystemTitles as Control, Sliderx.Effect.Slide, 500, 360);
+            } else if (!cgbSystemTitles.Visible && cgbFullTitles.Visible) {
+                Slidery.Animate(cgbFullTitles as Control, Slidery.Effect.Slide, 500, 360);
+                Sliderx.Animate(cgbSystemTitles as Control, Sliderx.Effect.Slide, 500, 360);
+            }
+        }
+
+        private void btnDownFu_Click(object sender, EventArgs e)
+        {
+            //Open System Titles cgp
+            if (!cgbFullTitles.Visible && cgbGameUpdates.Visible)
+            {
+                Slider.Animate(cgbGameUpdates as Control, Slider.Effect.Slide, 500, 360);
+                Slidery.Animate(cgbFullTitles as Control, Slidery.Effect.Slide, 500, 360);
+            } else if (!cgbFullTitles.Visible && cgbSystemTitles.Visible)
+            {
+                Sliderx.Animate(cgbSystemTitles as Control, Sliderx.Effect.Slide, 500, 360);
+                Slidery.Animate(cgbFullTitles as Control, Slidery.Effect.Slide, 500, 360);
             }
         }
 
@@ -451,38 +493,6 @@ namespace NUS_grabber_GUI
             
         }
 
-        private void txtSearchBox_TextChanged(object sender, EventArgs e)
-        {
-            cmbTitles.Items.Clear();
-             if (txtSearchBox.Text != "")
-             {
-                 foreach (var t in finalGameUpdates)
-                 {
-                    string desc = t.Desc;
-                    if (desc != null) { 
-                        if (desc.IndexOf(txtSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) //Case insensitive.
-                        {
-                            cmbTitles.Items.Add(t);
-                            cmbTitles.SelectedIndex = 0;
-                        }
-                    } else {
-                        lblAlert.Visible = true;
-                    }
-                }
-             }
-             else
-             {
-                foreach (var t in finalGameUpdates)
-                 {
-                     if (t.Desc != null)
-                     {
-                         cmbTitles.Items.Add(t);
-                         cmbTitles.SelectedIndex = 0;
-                     }
-                 }
-             }
-        }
-
         private void cmbSysTitles_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbSysTitles.SelectedText != null || cmbSysTitles.SelectedText != "")
@@ -500,6 +510,62 @@ namespace NUS_grabber_GUI
                     {
                         cmbSysVersions.Items.Add(vrS.Trim());
                         cmbSysVersions.SelectedIndex = 0;
+                    }
+                }
+            }
+        }
+        private void cmbFuTitles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbFuTitles.SelectedText != null || cmbFuTitles.SelectedText != "")
+            {
+                lblAlert.Visible = false;
+
+                cmbFuVersions.Items.Clear();
+                string vers = (cmbFuTitles.SelectedItem as ComboboxItem).Versions.ToString();
+                string[] versFuAr = vers.Split(',');
+
+                cmbFuVersions.Items.Add("Latest");
+                foreach (var vrF in versFuAr)
+                {
+                    if (vrF != null)
+                    {
+                        cmbFuVersions.Items.Add(vrF.Trim());
+                        cmbFuVersions.SelectedIndex = 0;
+                    }
+                }
+            }
+        }
+
+        private void txtSearchBox_TextChanged(object sender, EventArgs e)
+        {
+            cmbTitles.Items.Clear();
+            if (txtSearchBox.Text != "")
+            {
+                foreach (var t in finalGameUpdates)
+                {
+                    string desc = t.Desc;
+                    if (desc != null)
+                    {
+                        if (desc.IndexOf(txtSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) //Case insensitive.
+                        {
+                            cmbTitles.Items.Add(t);
+                            cmbTitles.SelectedIndex = 0;
+                        }
+                    }
+                    else
+                    {
+                        lblAlert.Visible = true;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var t in finalGameUpdates)
+                {
+                    if (t.Desc != null)
+                    {
+                        cmbTitles.Items.Add(t);
+                        cmbTitles.SelectedIndex = 0;
                     }
                 }
             }
@@ -535,6 +601,41 @@ namespace NUS_grabber_GUI
                     {
                         cmbSysTitles.Items.Add(s);
                         cmbSysTitles.SelectedIndex = 0;
+                    }
+                }
+            }
+        }
+
+        private void txtFuSearchBox_TextChanged(object sender, EventArgs e)
+        {
+            cmbFuTitles.Items.Clear();
+            if (txtFuSearchBox.Text != "")
+            {
+                foreach (var s in finalGameUpdates)
+                {
+                    string desc = s.Desc;
+                    if (desc != null)
+                    {
+                        if (desc.IndexOf(txtFuSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) //Case insensitive.
+                        {
+                            cmbFuTitles.Items.Add(s);
+                            cmbFuTitles.SelectedIndex = 0;
+                        }
+                    }
+                    else
+                    {
+                        lblAlert.Visible = true;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var s in finalGameUpdates)
+                {
+                    if (s.Desc != null)
+                    {
+                        cmbFuTitles.Items.Add(s);
+                        cmbFuTitles.SelectedIndex = 0;
                     }
                 }
             }

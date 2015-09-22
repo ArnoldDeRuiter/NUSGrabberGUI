@@ -38,6 +38,15 @@
             this.lblAuthor = new System.Windows.Forms.Label();
             this.lblOtherAuthor = new System.Windows.Forms.Label();
             this.lblAlert = new System.Windows.Forms.Label();
+            this.btnDownFu = new System.Windows.Forms.Button();
+            this.cgbFullTitles = new MayaMaya.myGroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtFuSearchBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbFuVersions = new System.Windows.Forms.ComboBox();
+            this.cmbFuTitles = new System.Windows.Forms.ComboBox();
             this.cgbSystemTitles = new MayaMaya.myGroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSysSearchBox = new System.Windows.Forms.TextBox();
@@ -58,6 +67,7 @@
             this.cmbTitles = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimalize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbClose)).BeginInit();
+            this.cgbFullTitles.SuspendLayout();
             this.cgbSystemTitles.SuspendLayout();
             this.cgbGameUpdates.SuspendLayout();
             this.SuspendLayout();
@@ -152,7 +162,7 @@
             this.lblOtherAuthor.AutoSize = true;
             this.lblOtherAuthor.BackColor = System.Drawing.Color.Transparent;
             this.lblOtherAuthor.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOtherAuthor.Location = new System.Drawing.Point(201, 280);
+            this.lblOtherAuthor.Location = new System.Drawing.Point(200, 280);
             this.lblOtherAuthor.Name = "lblOtherAuthor";
             this.lblOtherAuthor.Size = new System.Drawing.Size(130, 13);
             this.lblOtherAuthor.TabIndex = 13;
@@ -168,6 +178,101 @@
             this.lblAlert.TabIndex = 14;
             this.lblAlert.Text = "Alert message";
             this.lblAlert.Visible = false;
+            // 
+            // btnDownFu
+            // 
+            this.btnDownFu.Enabled = false;
+            this.btnDownFu.Location = new System.Drawing.Point(205, 138);
+            this.btnDownFu.Name = "btnDownFu";
+            this.btnDownFu.Size = new System.Drawing.Size(106, 23);
+            this.btnDownFu.TabIndex = 16;
+            this.btnDownFu.Text = "Full Titles";
+            this.btnDownFu.UseVisualStyleBackColor = true;
+            this.btnDownFu.Click += new System.EventHandler(this.btnDownFu_Click);
+            // 
+            // cgbFullTitles
+            // 
+            this.cgbFullTitles.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.cgbFullTitles.BorderColor = System.Drawing.Color.Transparent;
+            this.cgbFullTitles.Controls.Add(this.label5);
+            this.cgbFullTitles.Controls.Add(this.txtFuSearchBox);
+            this.cgbFullTitles.Controls.Add(this.label6);
+            this.cgbFullTitles.Controls.Add(this.label7);
+            this.cgbFullTitles.Controls.Add(this.label8);
+            this.cgbFullTitles.Controls.Add(this.cmbFuVersions);
+            this.cgbFullTitles.Controls.Add(this.cmbFuTitles);
+            this.cgbFullTitles.Location = new System.Drawing.Point(1, 32);
+            this.cgbFullTitles.Name = "cgbFullTitles";
+            this.cgbFullTitles.Size = new System.Drawing.Size(200, 278);
+            this.cgbFullTitles.TabIndex = 15;
+            this.cgbFullTitles.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(5, 21);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(39, 17);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Filter:";
+            // 
+            // txtFuSearchBox
+            // 
+            this.txtFuSearchBox.Location = new System.Drawing.Point(50, 21);
+            this.txtFuSearchBox.Name = "txtFuSearchBox";
+            this.txtFuSearchBox.Size = new System.Drawing.Size(145, 20);
+            this.txtFuSearchBox.TabIndex = 8;
+            this.txtFuSearchBox.TextChanged += new System.EventHandler(this.txtFuSearchBox_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(5, 95);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(54, 17);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Version:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(5, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 17);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Title:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(2, 2);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(55, 13);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Full Titles";
+            // 
+            // cmbFuVersions
+            // 
+            this.cmbFuVersions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFuVersions.FormattingEnabled = true;
+            this.cmbFuVersions.Location = new System.Drawing.Point(8, 115);
+            this.cmbFuVersions.Name = "cmbFuVersions";
+            this.cmbFuVersions.Size = new System.Drawing.Size(121, 21);
+            this.cmbFuVersions.TabIndex = 2;
+            // 
+            // cmbFuTitles
+            // 
+            this.cmbFuTitles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFuTitles.FormattingEnabled = true;
+            this.cmbFuTitles.Location = new System.Drawing.Point(8, 71);
+            this.cmbFuTitles.Name = "cmbFuTitles";
+            this.cmbFuTitles.Size = new System.Drawing.Size(187, 21);
+            this.cmbFuTitles.TabIndex = 0;
+            this.cmbFuTitles.SelectedIndexChanged += new System.EventHandler(this.cmbFuTitles_SelectedIndexChanged);
             // 
             // cgbSystemTitles
             // 
@@ -361,20 +466,22 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(314, 311);
+            this.Controls.Add(this.btnDownFu);
+            this.Controls.Add(this.cgbFullTitles);
             this.Controls.Add(this.cgbSystemTitles);
             this.Controls.Add(this.lblAlert);
-            this.Controls.Add(this.lblOtherAuthor);
             this.Controls.Add(this.cgbGameUpdates);
             this.Controls.Add(this.btnDownSys);
-            this.Controls.Add(this.lblAuthor);
             this.Controls.Add(this.btnDownUp);
             this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.pbMinimalize);
             this.Controls.Add(this.pbClose);
             this.Controls.Add(this.lblTitleForm);
+            this.Controls.Add(this.lblOtherAuthor);
+            this.Controls.Add(this.lblAuthor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
-            this.Text = "NUSGrabber GUI v1.5";
+            this.Text = "NUSGrabber GUI v1.6";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form_MouseDown);
@@ -382,6 +489,8 @@
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimalize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbClose)).EndInit();
+            this.cgbFullTitles.ResumeLayout(false);
+            this.cgbFullTitles.PerformLayout();
             this.cgbSystemTitles.ResumeLayout(false);
             this.cgbSystemTitles.PerformLayout();
             this.cgbGameUpdates.ResumeLayout(false);
@@ -420,6 +529,15 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbSysVersions;
         private System.Windows.Forms.ComboBox cmbSysTitles;
+        private MayaMaya.myGroupBox cgbFullTitles;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtFuSearchBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cmbFuVersions;
+        private System.Windows.Forms.ComboBox cmbFuTitles;
+        private System.Windows.Forms.Button btnDownFu;
     }
 }
 
