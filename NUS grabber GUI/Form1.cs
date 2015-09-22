@@ -10,6 +10,15 @@ namespace NUS_grabber_GUI
 {
     public partial class Form1 : Form
     {
+        #region Vars
+        private bool dragging = false;
+        private Point dragCursorPoint;
+        private Point dragFormPoint;
+        List<ComboboxItem> finalGameUpdates;
+        List<ComboboxSysItem> finalSystemTitles;
+        #endregion
+
+        #region Form code
         public Form1()
         {
             InitializeComponent();
@@ -48,8 +57,17 @@ namespace NUS_grabber_GUI
             webBrowserForPrinting.Url = new Uri(@"http://wiiubrew.org/wiki/Title_database");
         }
 
-        List<ComboboxItem> finalGameUpdates;
-        List<ComboboxSysItem> finalSystemTitles;
+        private void Form_Paint(object sender, PaintEventArgs e)
+        {
+            System.Drawing.Pen myPen;
+            myPen = new System.Drawing.Pen(System.Drawing.Color.Black);
+            System.Drawing.Graphics formGraphics = this.CreateGraphics();
+            formGraphics.DrawLine(myPen, 0, 30, 450, 30);
+            myPen.Dispose();
+            formGraphics.Dispose();
+        }
+        #endregion
+
         private void PrintDocument(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             finalGameUpdates = new List<ComboboxItem>();
@@ -260,13 +278,7 @@ namespace NUS_grabber_GUI
 
         }
         #endregion
-
-        #region Vars
-        private bool dragging = false;
-        private Point dragCursorPoint;
-        private Point dragFormPoint;
-        #endregion
-
+        
         #region FormBorderStyle == None - This makes it draggable
         private void Form_MouseDown(object sender, MouseEventArgs e)
         {
@@ -313,6 +325,7 @@ namespace NUS_grabber_GUI
         }
         #endregion
 
+        #region Buttons on the right. With Section buttons region
         private void btnDownload_Click(object sender, EventArgs e)
         {
             //If on Game Updates
@@ -419,7 +432,8 @@ namespace NUS_grabber_GUI
             }
 
         }
-        
+       
+        #region Section buttons
         private void btnDownUp_Click(object sender, EventArgs e)
         {
             //Open Game Updates cgp
@@ -459,17 +473,11 @@ namespace NUS_grabber_GUI
                 Slidery.Animate(cgbFullTitles as Control, Slidery.Effect.Slide, 500, 360);
             }
         }
+        #endregion
+        #endregion
 
-        private void Form_Paint(object sender, PaintEventArgs e)
-        {
-            System.Drawing.Pen myPen;
-            myPen = new System.Drawing.Pen(System.Drawing.Color.Black);
-            System.Drawing.Graphics formGraphics = this.CreateGraphics();
-            formGraphics.DrawLine(myPen, 0, 30, 450, 30);
-            myPen.Dispose();
-            formGraphics.Dispose();
-        }
-
+        #region Comboboxes & Filter. With Section region
+        #region Game Updates
         private void cmbTitles_TextChanged(object sender, EventArgs e)
         {
             if (cmbTitles.SelectedText != null || cmbTitles.SelectedText != "")
@@ -491,49 +499,6 @@ namespace NUS_grabber_GUI
                 }
             }
             
-        }
-
-        private void cmbSysTitles_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbSysTitles.SelectedText != null || cmbSysTitles.SelectedText != "")
-            {
-                lblAlert.Visible = false;
-
-                cmbSysVersions.Items.Clear();
-                string vers = (cmbSysTitles.SelectedItem as ComboboxSysItem).Versions.ToString();
-                string[] versSysAr = vers.Split(',');
-
-                cmbSysVersions.Items.Add("Latest");
-                foreach (var vrS in versSysAr)
-                {
-                    if (vrS != null)
-                    {
-                        cmbSysVersions.Items.Add(vrS.Trim());
-                        cmbSysVersions.SelectedIndex = 0;
-                    }
-                }
-            }
-        }
-        private void cmbFuTitles_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbFuTitles.SelectedText != null || cmbFuTitles.SelectedText != "")
-            {
-                lblAlert.Visible = false;
-
-                cmbFuVersions.Items.Clear();
-                string vers = (cmbFuTitles.SelectedItem as ComboboxItem).Versions.ToString();
-                string[] versFuAr = vers.Split(',');
-
-                cmbFuVersions.Items.Add("Latest");
-                foreach (var vrF in versFuAr)
-                {
-                    if (vrF != null)
-                    {
-                        cmbFuVersions.Items.Add(vrF.Trim());
-                        cmbFuVersions.SelectedIndex = 0;
-                    }
-                }
-            }
         }
 
         private void txtSearchBox_TextChanged(object sender, EventArgs e)
@@ -566,6 +531,29 @@ namespace NUS_grabber_GUI
                     {
                         cmbTitles.Items.Add(t);
                         cmbTitles.SelectedIndex = 0;
+                    }
+                }
+            }
+        }
+        #endregion
+        #region System Titles
+        private void cmbSysTitles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbSysTitles.SelectedText != null || cmbSysTitles.SelectedText != "")
+            {
+                lblAlert.Visible = false;
+
+                cmbSysVersions.Items.Clear();
+                string vers = (cmbSysTitles.SelectedItem as ComboboxSysItem).Versions.ToString();
+                string[] versSysAr = vers.Split(',');
+
+                cmbSysVersions.Items.Add("Latest");
+                foreach (var vrS in versSysAr)
+                {
+                    if (vrS != null)
+                    {
+                        cmbSysVersions.Items.Add(vrS.Trim());
+                        cmbSysVersions.SelectedIndex = 0;
                     }
                 }
             }
@@ -605,6 +593,29 @@ namespace NUS_grabber_GUI
                 }
             }
         }
+        #endregion
+        #region Full Titles
+        private void cmbFuTitles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbFuTitles.SelectedText != null || cmbFuTitles.SelectedText != "")
+            {
+                lblAlert.Visible = false;
+
+                cmbFuVersions.Items.Clear();
+                string vers = (cmbFuTitles.SelectedItem as ComboboxItem).Versions.ToString();
+                string[] versFuAr = vers.Split(',');
+
+                cmbFuVersions.Items.Add("Latest");
+                foreach (var vrF in versFuAr)
+                {
+                    if (vrF != null)
+                    {
+                        cmbFuVersions.Items.Add(vrF.Trim());
+                        cmbFuVersions.SelectedIndex = 0;
+                    }
+                }
+            }
+        }
 
         private void txtFuSearchBox_TextChanged(object sender, EventArgs e)
         {
@@ -640,5 +651,7 @@ namespace NUS_grabber_GUI
                 }
             }
         }
+        #endregion
+        #endregion
     }
 }
