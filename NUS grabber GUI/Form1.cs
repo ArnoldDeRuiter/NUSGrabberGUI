@@ -74,120 +74,130 @@ namespace NUS_grabber_GUI
             finalSystemTitles = new List<ComboboxSysItem>();
             int progress = 0;
             //When page loaded
-            bool skipFirst = false, skipSecond = false;
+            bool skipFirst = false, skipSecond = false, skipZero = false, skipMinusOne = false; //Crediar added a 'Title-ID Types' table.
             foreach (HtmlElement table in ((WebBrowser)sender).Document.GetElementsByTagName("table"))
             {
                 progress++;
                 progress = (progress == 100) ? 0 : progress;
                 prBar.Value = progress;
-                if (skipFirst && skipSecond)
+                if (!skipMinusOne)
                 {
-                    if (table.GetAttribute("className").Equals("wikitable sortable jquery-tablesorter") || table.GetAttribute("className").Equals("wikitable sortable")) //Removing jquery-tablesorter for some... thanks voddy!
-                    {
-                        foreach (HtmlElement tr in table.GetElementsByTagName("tr"))
+                    skipMinusOne = true;
+                } else {
+                
+                    if (!skipZero) {
+                        skipZero = true;
+                    } else { 
+                        if (skipZero && skipFirst && skipSecond)
                         {
-                            progress++;
-                            progress = (progress == 100) ? 0 : progress;
-                            prBar.Value = progress;
-                            int columncount = 1;
-                            ComboboxItem cbi = new ComboboxItem();
-                            foreach (HtmlElement td in tr.GetElementsByTagName("td"))
+                            if (table.GetAttribute("className").Equals("wikitable sortable jquery-tablesorter") || table.GetAttribute("className").Equals("wikitable sortable")) //Removing jquery-tablesorter for some... thanks voddy!
                             {
-                                //TITLE
-                                if (columncount == 1)
+                                foreach (HtmlElement tr in table.GetElementsByTagName("tr"))
                                 {
-                                    string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; }
-                                    cbi.Title_ID = abc;
+                                    progress++;
+                                    progress = (progress == 100) ? 0 : progress;
+                                    prBar.Value = progress;
+                                    int columncount = 1;
+                                    ComboboxItem cbi = new ComboboxItem();
+                                    foreach (HtmlElement td in tr.GetElementsByTagName("td"))
+                                    {
+                                        //TITLE
+                                        if (columncount == 1)
+                                        {
+                                            string abc = null;
+                                            try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; }
+                                            cbi.Title_ID = abc;
+                                        }
+                                        //DESC
+                                        if (columncount == 2)
+                                        {
+                                            string abc = null;
+                                            try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; }
+                                            cbi.Desc = abc;
+                                        }
+                                        //VER
+                                        if (columncount == 4)
+                                        {
+                                            string abc = null;
+                                            try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; }
+                                            cbi.Versions = abc;
+                                        }
+                                        //REG
+                                        if (columncount == 5)
+                                        {
+                                            string abc = null;
+                                            try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; }
+                                            if (cbi.Desc != null)
+                                                cbi.Desc = abc + " - " + cbi.Desc;
+                                        }
+                                        columncount++;
+                                    }
+                                    if (cbi.Desc != null && cbi.Versions.ToString() != "v0") //Ok, I now removed the possible non actuall updates, according to WiiUBrew.
+                                        finalGameUpdates.Add(cbi);
                                 }
-                                //DESC
-                                if (columncount == 2)
-                                {
-                                    string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; }
-                                    cbi.Desc = abc;
-                                }
-                                //VER
-                                if (columncount == 4)
-                                {
-                                    string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; }
-                                    cbi.Versions = abc;
-                                }
-                                //REG
-                                if (columncount == 5)
-                                {
-                                    string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = abc; cbi.Desc = abc; cbi.Versions = abc; }
-                                    if (cbi.Desc != null)
-                                        cbi.Desc = abc + " - " + cbi.Desc;
-                                }
-                                columncount++;
+                                break; //We got the table(s) we wanted, now stop.
                             }
-                            if (cbi.Desc != null)
-                                finalGameUpdates.Add(cbi);
                         }
-                        break; //We got the table(s) we wanted, now stop.
-                    }
-                }
-                else if (skipFirst)
-                {
-                    progress++;
-                    progress = (progress == 100) ? 0 : progress;
-                    prBar.Value = progress;
-                    if (table.GetAttribute("className").Equals("wikitable sortable jquery-tablesorter") || table.GetAttribute("className").Equals("wikitable sortable")) //Removing jquery-tablesorter for some... thanks voddy!
-                    {
-                        foreach (HtmlElement tr in table.GetElementsByTagName("tr"))
+                        else if (skipFirst)
                         {
                             progress++;
                             progress = (progress == 100) ? 0 : progress;
                             prBar.Value = progress;
-                            int columncount = 1;
-                            ComboboxSysItem cbisys = new ComboboxSysItem();
-                            foreach (HtmlElement td in tr.GetElementsByTagName("td"))
+                            if (table.GetAttribute("className").Equals("wikitable sortable jquery-tablesorter") || table.GetAttribute("className").Equals("wikitable sortable")) //Removing jquery-tablesorter for some... thanks voddy!
                             {
-                                //TITLE
-                                if (columncount == 1)
+                                foreach (HtmlElement tr in table.GetElementsByTagName("tr"))
                                 {
-                                    string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; }                                    
-                                    cbisys.Title_ID = abc;
-                                }
-                                //DESC
-                                if (columncount == 2)
-                                {
-                                    string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; }
-                                    cbisys.Desc = abc;
-                                }
-                                //VER
-                                if (columncount == 4)
-                                {
-                                    string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; }
-                                    cbisys.Versions = abc;
-                                }
-                                //REG
-                                if (columncount == 5)
-                                {
-                                    string abc = null;
-                                    try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; }
+                                    progress++;
+                                    progress = (progress == 100) ? 0 : progress;
+                                    prBar.Value = progress;
+                                    int columncount = 1;
+                                    ComboboxSysItem cbisys = new ComboboxSysItem();
+                                    foreach (HtmlElement td in tr.GetElementsByTagName("td"))
+                                    {
+                                        //TITLE
+                                        if (columncount == 1)
+                                        {
+                                            string abc = null;
+                                            try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; }                                    
+                                            cbisys.Title_ID = abc;
+                                        }
+                                        //DESC
+                                        if (columncount == 2)
+                                        {
+                                            string abc = null;
+                                            try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; }
+                                            cbisys.Desc = abc;
+                                        }
+                                        //VER
+                                        if (columncount == 4)
+                                        {
+                                            string abc = null;
+                                            try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; }
+                                            cbisys.Versions = abc;
+                                        }
+                                        //REG
+                                        if (columncount == 5)
+                                        {
+                                            string abc = null;
+                                            try { abc = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = abc; cbisys.Desc = abc; cbisys.Versions = abc; }
+                                            if (cbisys.Desc != null)
+                                                cbisys.Desc = abc + " - " + cbisys.Desc;
+                                        }
+                                        columncount++;
+                                    }
                                     if (cbisys.Desc != null)
-                                        cbisys.Desc = abc + " - " + cbisys.Desc;
+                                        finalSystemTitles.Add(cbisys);
                                 }
-                                columncount++;
-                            }
-                            if (cbisys.Desc != null)
-                                finalSystemTitles.Add(cbisys);
-                        }
 
-                        skipSecond = true;
-                    }   
-                }
-                else
-                {
-                    skipFirst = true;
-                }
+                                skipSecond = true;
+                            }   
+                        }
+                        else
+                        {
+                            skipFirst = true;
+                        }
+                    }//zero
+                }//minus one
             }
 
             //Sorting...

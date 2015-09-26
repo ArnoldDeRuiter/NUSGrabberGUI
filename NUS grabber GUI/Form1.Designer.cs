@@ -481,7 +481,7 @@
             this.Controls.Add(this.lblAuthor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
-            this.Text = "NUSGrabber GUI v1.6 U1";
+            this.Text = "NUSGrabber GUI v1.7";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form_MouseDown);
